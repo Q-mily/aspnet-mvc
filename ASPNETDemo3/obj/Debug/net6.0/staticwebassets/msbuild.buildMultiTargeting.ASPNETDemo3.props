@@ -1,0 +1,3 @@
+﻿<Project>
+  <Import Project="..\build\ASPNETDemo3.props" />
+</Project>
