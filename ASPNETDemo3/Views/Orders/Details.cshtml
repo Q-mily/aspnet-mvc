@@ -1,73 +1,131 @@
 ﻿@model ASPNETDemo3.Data.Order
-
+@using System.Text.Json;
+@using System.Text.Json.Serialization;
 @{
     ViewData["Title"] = "Details";
     Layout = "~/Views/Shared/_Layout.cshtml";
+    var lobbies = ViewBag.Lobbies;
+    var order = ViewBag.order;
 }
 
-<h1>Details</h1>
-
-<div>
-    <h4>Order</h4>
-    <hr />
-    <dl class="row">
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.customerName)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.customerName)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.customerPhone)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.customerPhone)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.groomName)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.groomName)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.brideName)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.brideName)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.ca)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.ca)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.dateAt)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.dateAt)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.status)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.status)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.createdAt)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.createdAt)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Lobby)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Lobby.Id)
-        </dd>
-    </dl>
+<div class="row">
+    <div class="col-6">
+        <h4>Thông tin đặt tiệc</h4>
+    </div>
+    <div class="col-6 d-flex justify-content-end">
+        @if (order.status == 1)
+        {
+            @Html.Raw("<button class='btn btn-danger' style='margin-right: 8px;'>Hủy</button><button class='btn btn-primary'>Xác nhận Đặt</button>");
+        }
+    </div>
 </div>
-<div>
-    <a asp-action="Edit" asp-route-id="@Model?.Id">Edit</a> |
-    <a asp-action="Index">Back to List</a>
+<div class="card mt-2">
+    <div class="card-body">
+        <form asp-action="Edit">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="Id" />
+            <input type="hidden" name="status" value="@order.status" />
+            <div class="row">
+                <div class="col-6">
+                    <h5>Thông tin người đặt</h5>
+                    <div class="form-group">
+                        <label asp-for="customerName" class="control-label">Khách đặt tiệc</label>
+                        <input asp-for="customerName" class="form-control" required />
+                        <span asp-validation-for="customerName" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="customerPhone" class="control-label">Số điện thoại khách đặt</label>
+                        <input asp-for="customerPhone" class="form-control" />
+                        <span asp-validation-for="customerPhone" class="text-danger"></span>
+                    </div>
+
+                    <div class="form-group">
+                        <label asp-for="lobbyId" class="control-label">Sảnh</label>
+                        <select asp-for="lobbyId" class ="form-control">
+                            <option value="">--Trống--</option>
+                            @foreach (var lobby in lobbies)
+                            {
+                                <option value="@lobby.Id">@lobby.Name - (lượng bàn tối thiểu: @lobby.MinCountTable)</option>
+                            }
+                        </select>
+                    </div> 
+                </div>
+                <div class="col-6">
+                    <h5>Thông tin tiệc cưới</h5>
+                    <div class="form-group">
+                        <label asp-for="groomName" class="control-label">Tên chú rể</label>
+                        <input asp-for="groomName" class="form-control" />
+                        <span asp-validation-for="groomName" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="brideName" class="control-label">Tên cô dâu</label>
+                        <input asp-for="brideName" class="form-control" />
+                        <span asp-validation-for="brideName" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="ca" class="control-label">Ca</label>
+                        <select asp-for="ca" class="form-control">
+                            <option value="">--Trống--</option>
+                            <option value="1"> Ca sáng (8:00 - 12:00)</option>
+                            <option value="2"> Ca chiều (13:00 - 17:00)</option>
+                            <option value="3"> Ca tối (18:00 - 22:00)</option>
+                        </select>
+                        <span asp-validation-for="ca" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="dateAt" class="control-label">Ngày tổ chức</label>
+                        <input asp-for="dateAt" class="form-control" required type="date"/>
+                        <span asp-validation-for="dateAt" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <input type="submit" value="Cập nhật" class="btn btn-primary" />
+                    </div>
+                </div>
+            </div>
+                    
+        </form>
+    </div>
+</div>
+
+<div class="card">
+    <div class="card-body">
+        <div class="row">
+            <div class="col-6">
+                <h4>Thông tin bàn ăn</h4>
+            </div>
+            <div class="col-6 text-end">
+                <a class="btn btn-info" asp-controller="OrderTables" asp-action="Create" asp-route-orderId="@order.Id">Thêm</a>
+            </div>
+        </div>
+        <div class="table-responsive">
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>Tên bàn</th>
+                        <th>Số lượng</th>
+                        <th>Đơn giá</th>
+                        <th>Thành tiền</th>
+                        <th>Lựa chọn</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var orderTable in @order.OrderTables)
+                    {
+                        
+                        <tr>
+                            <td>@orderTable.table_name</td>
+                            <td>@orderTable.Amount</td>
+                            <td>@orderTable.UnitPrice</td>  
+                            <td>@orderTable.TotalPrice</td>
+                            <td>
+                                <a class="btn btn-primary" asp-controller="OrderTables" asp-action="Edit" asp-route-id="@orderTable.Id" asp-route-orderId="@order.Id">Chi tiết</a>
+                                <a class="btn btn-danger" asp-controller="OrderTables" asp-action="Delete" asp-route-id="@orderTable.Id">Xóa</a>
+                            </td>
+                        </tr>
+                    }
+                    
+                </tbody>
+            </table>
+        </div>
+    </div>
 </div>

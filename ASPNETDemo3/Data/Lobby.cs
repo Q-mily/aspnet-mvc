@@ -10,6 +10,6 @@
 
         public int status { get; set; }
         public DateTime createdAt {  get; set; }
-        public ICollection<Order> Orders { get; set; }
+        public ICollection<Order>? Orders { get; set; }
     }
 }

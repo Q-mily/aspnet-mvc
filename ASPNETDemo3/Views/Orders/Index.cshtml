@@ -13,34 +13,34 @@
 <table class="table">
     <thead>
         <tr>
-            <th>
+            <th class="text-center">
                 @Html.DisplayNameFor(model => model.customerName)
             </th>
-            <th>
+            <th class="text-center">
                 @Html.DisplayNameFor(model => model.customerPhone)
             </th>
-            <th>
+            <th class="text-center">
                 @Html.DisplayNameFor(model => model.groomName)
             </th>
-            <th>
+            <th class="text-center">
                 @Html.DisplayNameFor(model => model.brideName)
             </th>
-            <th>
+            <th class="text-center">
                 @Html.DisplayNameFor(model => model.ca)
             </th>
-            <th>
+            <th class="text-center">
                 @Html.DisplayNameFor(model => model.dateAt)
             </th>
-            <th>
+            <th class="text-center">
                 @Html.DisplayNameFor(model => model.status)
             </th>
-            <th>
+            <th class="text-center">
                 @Html.DisplayNameFor(model => model.createdAt)
             </th>
-            <th>
+            <th class="text-center">
                 @Html.DisplayNameFor(model => model.Lobby)
             </th>
-            <th></th>
+            <th class="text-center">Options</th>
         </tr>
     </thead>
     <tbody>
@@ -65,16 +65,30 @@
                 @Html.DisplayFor(modelItem => item.dateAt)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.status)
+                    @if (item.status == 0)
+                    {
+                        @Html.Raw("<p class='bagde bg-danger rounded text-center'>Hủy</p>");
+                    }
+                @if (item.status == 1)
+                {
+                        @Html.Raw("<p class='bagde bg-warning rounded text-center'>Đang đặt</p>");
+                }
+                @if (item.status == 2)
+                {
+                        @Html.Raw("<p class='bagde bg-primary rounded text-center'>Hoàn tất</p>");
+                }
+                @if (item.status == 2)
+                {
+                        @Html.Raw("<p class='bagde bg-success rounded text-center'>Thanh toán</p>");
+                }
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.createdAt)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.Lobby.Id)
+                @Html.DisplayFor(modelItem => item.Lobby.Name)
             </td>
             <td>
-                <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
                 <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
                 <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
             </td>

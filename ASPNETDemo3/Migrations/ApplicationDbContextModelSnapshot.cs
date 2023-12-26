@@ -17,7 +17,7 @@ namespace ASPNETDemo3.Migrations
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("ProductVersion", "6.0.21")
+                .HasAnnotation("ProductVersion", "6.0.23")
                 .HasAnnotation("Relational:MaxIdentifierLength", 128);
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder, 1L, 1);
@@ -137,6 +137,62 @@ namespace ASPNETDemo3.Migrations
                     b.HasIndex("lobbyId");
 
                     b.ToTable("Orders");
+                });
+
+            modelBuilder.Entity("ASPNETDemo3.Data.OrderTable", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
+
+                    b.Property<int?>("Amount")
+                        .HasColumnType("int");
+
+                    b.Property<int?>("OrderId")
+                        .HasColumnType("int");
+
+                    b.Property<int?>("TotalPrice")
+                        .HasColumnType("int");
+
+                    b.Property<int?>("UnitPrice")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime>("createdAt")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("datetime2")
+                        .HasDefaultValueSql("GETUTCDATE()");
+
+                    b.Property<int>("status")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasDefaultValue(1);
+
+                    b.Property<string>("table_name")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("OrderId");
+
+                    b.ToTable("OrderTables");
+                });
+
+            modelBuilder.Entity("FoodOrderTable", b =>
+                {
+                    b.Property<int>("FoodsId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("OrderTablesId")
+                        .HasColumnType("int");
+
+                    b.HasKey("FoodsId", "OrderTablesId");
+
+                    b.HasIndex("OrderTablesId");
+
+                    b.ToTable("FoodOrderTable");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>
@@ -358,9 +414,34 @@ namespace ASPNETDemo3.Migrations
                 {
                     b.HasOne("ASPNETDemo3.Data.Lobby", "Lobby")
                         .WithMany("Orders")
-                        .HasForeignKey("lobbyId");
+                        .HasForeignKey("lobbyId")
+                        .OnDelete(DeleteBehavior.Cascade);
 
                     b.Navigation("Lobby");
+                });
+
+            modelBuilder.Entity("ASPNETDemo3.Data.OrderTable", b =>
+                {
+                    b.HasOne("ASPNETDemo3.Data.Order", "Order")
+                        .WithMany("OrderTables")
+                        .HasForeignKey("OrderId");
+
+                    b.Navigation("Order");
+                });
+
+            modelBuilder.Entity("FoodOrderTable", b =>
+                {
+                    b.HasOne("ASPNETDemo3.Data.Food", null)
+                        .WithMany()
+                        .HasForeignKey("FoodsId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("ASPNETDemo3.Data.OrderTable", null)
+                        .WithMany()
+                        .HasForeignKey("OrderTablesId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
@@ -417,6 +498,11 @@ namespace ASPNETDemo3.Migrations
             modelBuilder.Entity("ASPNETDemo3.Data.Lobby", b =>
                 {
                     b.Navigation("Orders");
+                });
+
+            modelBuilder.Entity("ASPNETDemo3.Data.Order", b =>
+                {
+                    b.Navigation("OrderTables");
                 });
 #pragma warning restore 612, 618
         }

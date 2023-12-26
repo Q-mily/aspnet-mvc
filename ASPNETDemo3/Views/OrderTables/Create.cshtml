@@ -1,0 +1,104 @@
+﻿@using System.Text.Json;
+@model DataOrderTable
+
+@{
+    ViewData["Title"] = "Create";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    var OrderId = @ViewBag.OrderId;
+    var foods = ViewBag.Foods;
+    var order = ViewBag.order;
+}
+
+<h1>Đặt tiệc</h1>
+
+<h4>Thêm mới bàn</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Create">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input asp-for="OrderTable.OrderId" class="form-control" value="@OrderId" hidden />
+            <div class="form-group">
+                <label asp-for="OrderTable.table_name" class="control-label">Người đặt tiệc</label>
+                <p class="form-control">@order.customerName - @order.customerPhone</p>
+            </div>
+            <div class="form-group">
+                <label asp-for="OrderTable.table_name" class="control-label">Tên bàn</label>
+                <input asp-for="OrderTable.table_name" class="form-control" />
+                <span asp-validation-for="OrderTable.table_name" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="OrderTable.UnitPrice" class="control-label">Đơn giá bàn</label>
+                <input asp-for="OrderTable.UnitPrice" class="form-control" disabled  value="0"/>
+                <span asp-validation-for="OrderTable.UnitPrice" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="OrderTable.Amount" class="control-label">Số lượng bàn</label>
+                <input asp-for="OrderTable.Amount" class="form-control" value="0"/>
+                <span asp-validation-for="OrderTable.Amount" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="OrderTable.TotalPrice" class="control-label"></label>
+                <input asp-for="OrderTable.TotalPrice" class="form-control" disabled value="0" />
+                <span asp-validation-for="OrderTable.TotalPrice" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="FoodIds" class="control-label">Danh sách món ăn</label>
+                <select class="select2 form-control" asp-for="FoodIds" class="form-control" multiple="multiple">
+                    @foreach (var food in foods)
+                    {
+                        <option value=@food.Id >@food.Name</option>
+                    }
+                </select>
+                <span asp-validation-for="FoodIds" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Create" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-controller="Orders" asp-action="Details" asp-route-id="@order.Id">Back</a>
+</div>
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
+<script>
+    $(document).ready(() => {
+        var Foods = @Html.Raw(Json.Serialize(foods));
+        
+        var PricePerTable = 0;
+        var Amount = 0;
+        $('.select2').on('select2:selecting', function(e) {
+            foodId = parseInt(e.params.args.data.id);
+
+            PricePerTable += Foods.find(food => food.id === foodId).price;
+            $('#OrderTable_UnitPrice').val(PricePerTable);
+            console.log('Selecting: ' , e.params.args.data);
+
+            caculateNum();
+        });
+
+        $('.select2').on('select2:unselecting', function (e) {
+            foodId = parseInt(e.params.args.data.id);
+
+            PricePerTable -= Foods.find(food => food.id === foodId).price;
+            $('#OrderTable_UnitPrice').val(PricePerTable);
+            console.log('UnSelecting: ', e.params.args.data);
+
+            caculateNum();
+        });
+
+        $('#OrderTable_Amount').on('input', function (e) {
+            Amount = parseInt(e.target.value);
+            caculateNum();
+        })
+
+        function caculateNum() {
+            const TotalPrice = Amount * PricePerTable;
+            $("#OrderTable_TotalPrice").val(TotalPrice);
+        }
+    })
+</script>

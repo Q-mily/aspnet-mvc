@@ -10,7 +10,7 @@ namespace ASPNETDemo3.Data
         public DbSet<Lobby> Lobbies { get; set; }
         public DbSet<Order> Orders { get; set; }
         public DbSet<ApplicationUser>  User { get; set; }
-
+        public DbSet<OrderTable> OrderTables { get; set; }
         public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options)
             : base(options)
         {
@@ -42,7 +42,31 @@ namespace ASPNETDemo3.Data
                 .HasOne(o => o.Lobby)
                 .WithMany(l => l.Orders)
                 .HasForeignKey(o => o.lobbyId)
+                .IsRequired(false)
+                .OnDelete(DeleteBehavior.Cascade);
+            modelBuilder.Entity<Order>()
+                .Property(o => o.status)
+                .HasDefaultValue(1);
+            modelBuilder.Entity<Order>()
+               .Property(p => p.createdAt)
+               .HasDefaultValueSql("GETUTCDATE()");
+
+            modelBuilder.Entity<OrderTable>()
+                .Property(p => p.status)
+                .HasDefaultValue(1);
+            modelBuilder.Entity<OrderTable>()
+               .Property(p => p.createdAt)
+               .HasDefaultValueSql("GETUTCDATE()");
+
+            modelBuilder.Entity<OrderTable>()
+                .HasOne(p => p.Order)
+                .WithMany(o => o.OrderTables)
+                .HasForeignKey(o => o.OrderId)
                 .IsRequired(false);
+
+            modelBuilder.Entity<Food>()
+                .HasMany(f => f.OrderTables)
+                .WithMany(c => c.Foods);
 
             base.OnModelCreating(modelBuilder);
         }

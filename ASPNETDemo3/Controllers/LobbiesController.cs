@@ -63,6 +63,10 @@ namespace ASPNETDemo3.Controllers
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
+            else
+            {
+                return Json(ModelState);
+            }
             return View(lobby);
         }
 

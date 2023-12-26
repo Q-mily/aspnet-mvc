@@ -19,6 +19,7 @@ namespace ASPNETDemo3.Controllers
         }
 
         // GET: Foods
+        [Authorize]
         public async Task<IActionResult> Index()
         {
               return _context.Foods != null ? 
@@ -65,6 +66,10 @@ namespace ASPNETDemo3.Controllers
                 _context.Add(food);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
+            }
+            else
+            {
+                return Json(ModelState);
             }
             return View(food);
         }

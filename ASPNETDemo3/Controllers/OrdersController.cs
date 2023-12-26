@@ -6,6 +6,9 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using ASPNETDemo3.Data;
+using System.Diagnostics;
+using System.Text.Json;
+using System.Text.Json.Serialization;
 
 namespace ASPNETDemo3.Controllers
 {
@@ -21,6 +24,7 @@ namespace ASPNETDemo3.Controllers
         // GET: Orders
         public async Task<IActionResult> Index()
         {
+
             var applicationDbContext = _context.Orders.Include(o => o.Lobby);
             return View(await applicationDbContext.ToListAsync());
         }
@@ -35,13 +39,26 @@ namespace ASPNETDemo3.Controllers
 
             var order = await _context.Orders
                 .Include(o => o.Lobby)
+                .Include(o => o.OrderTables)
                 .FirstOrDefaultAsync(m => m.Id == id);
             if (order == null)
             {
                 return NotFound();
             }
 
+            List<Lobby> lobbies = _context.Lobbies.ToList();
+            ViewBag.Lobbies = lobbies;
+            ViewBag.order = order;
             return View(order);
+            //var json = JsonSerializer.Serialize(order, new JsonSerializerOptions
+            //{
+            //    ReferenceHandler = ReferenceHandler.Preserve,
+            //    //PropertyNamingPolicy = JsonNamingPolicy.CamelCase,
+            //    DefaultIgnoreCondition = JsonIgnoreCondition.WhenWritingNull,
+            //    //IgnoreReadOnlyProperties = true,
+            //    //WriteIndented = true
+            //});
+            //return Json(json);
         }
 
         // GET: Orders/Create
@@ -63,6 +80,10 @@ namespace ASPNETDemo3.Controllers
                 _context.Add(order);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
+            }
+            else
+            {
+                return Json(ModelState);
             }
             ViewData["lobbyId"] = new SelectList(_context.Lobbies, "Id", "Id", order.lobbyId);
             return View(order);
@@ -115,7 +136,8 @@ namespace ASPNETDemo3.Controllers
                         throw;
                     }
                 }
-                return RedirectToAction(nameof(Index));
+                ViewBag.Alert = "Cập nhật thành công";
+                return RedirectToAction("Details", new { id = order.Id });
             }
             ViewData["lobbyId"] = new SelectList(_context.Lobbies, "Id", "Id", order.lobbyId);
             return View(order);
@@ -152,7 +174,9 @@ namespace ASPNETDemo3.Controllers
             var order = await _context.Orders.FindAsync(id);
             if (order != null)
             {
-                _context.Orders.Remove(order);
+                order.status = 0;
+                _context.Add(order);
+                //_context.Orders.Remove(order);
             }
             
             await _context.SaveChangesAsync();
@@ -162,6 +186,28 @@ namespace ASPNETDemo3.Controllers
         private bool OrderExists(int id)
         {
           return (_context.Orders?.Any(e => e.Id == id)).GetValueOrDefault();
+        }
+
+        public async Task<IActionResult> AddOrderTables(int? id)
+        {
+            if (id == null || _context.Orders == null)
+            {
+                return NotFound();
+            }
+
+            var order = await _context.Orders
+                .Include(o => o.Lobby)
+                .Include(o => o.OrderTables)
+                .FirstOrDefaultAsync(m => m.Id == id);
+            //var orderTables = await _context.OrderTables.Where(o => o.OrderId == order.Id).ToListAsync();
+            if (order == null)
+            {
+                return NotFound();
+            }
+
+            List<Lobby> lobbies = _context.Lobbies.ToList();
+            ViewBag.Lobbies = lobbies;
+            return View(order);
         }
     }
 }

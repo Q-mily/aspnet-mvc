@@ -8,5 +8,6 @@
         public string Description { get; set; }
         public int status { get; set; }
         public DateTime createdAt { get; set; }
+        public List<OrderTable>? OrderTables { get; } = new();
     }
 }
