@@ -11495,19 +11495,19 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\Asus\\.nuget\\packages\\": {}
+    "C:\\Users\\nguyen\\.nuget\\packages\\": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "H:\\repo\\ASPNETDemo3\\ASPNETDemo3\\ASPNETDemo3.csproj",
+      "projectUniqueName": "D:\\Workspace\\UIT\\SE310\\aspnet-mvc\\ASPNETDemo3\\ASPNETDemo3.csproj",
       "projectName": "ASPNETDemo3",
-      "projectPath": "H:\\repo\\ASPNETDemo3\\ASPNETDemo3\\ASPNETDemo3.csproj",
-      "packagesPath": "C:\\Users\\Asus\\.nuget\\packages\\",
-      "outputPath": "H:\\repo\\ASPNETDemo3\\ASPNETDemo3\\obj\\",
+      "projectPath": "D:\\Workspace\\UIT\\SE310\\aspnet-mvc\\ASPNETDemo3\\ASPNETDemo3.csproj",
+      "packagesPath": "C:\\Users\\nguyen\\.nuget\\packages\\",
+      "outputPath": "D:\\Workspace\\UIT\\SE310\\aspnet-mvc\\ASPNETDemo3\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
-        "C:\\Users\\Asus\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\nguyen\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
@@ -11583,7 +11583,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.401\\RuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.100\\RuntimeIdentifierGraph.json"
       }
     }
   }
