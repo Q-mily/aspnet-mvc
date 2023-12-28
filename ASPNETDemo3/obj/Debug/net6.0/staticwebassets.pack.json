@@ -3889,6 +3889,10 @@
       "PackagePath": "staticwebassets\\assets\\images\\login\\login_bg.jpg"
     },
     {
+      "Id": "D:\\Workspace\\UIT\\SE310\\aspnet-mvc\\ASPNETDemo3\\wwwroot\\assets\\images\\login_image.png",
+      "PackagePath": "staticwebassets\\assets\\images\\login_image.png"
+    },
+    {
       "Id": "D:\\Workspace\\UIT\\SE310\\aspnet-mvc\\ASPNETDemo3\\wwwroot\\assets\\images\\logo.png",
       "PackagePath": "staticwebassets\\assets\\images\\logo.png"
     },
