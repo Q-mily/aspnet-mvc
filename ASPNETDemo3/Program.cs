@@ -1,6 +1,7 @@
 using ASPNETDemo3.Data;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.FileProviders;
 var builder = WebApplication.CreateBuilder(args);
 
@@ -17,12 +18,12 @@ builder.Services.AddControllersWithViews();
 var app = builder.Build();
 
 
-using (var scope = app.services.createscope())
+using (var scope = app.Services.CreateScope())
 {
-    var services = scope.serviceprovider;
+    var services = scope.ServiceProvider;
 
-    var context = services.getrequiredservice<applicationdbcontext>();
-    context.database.migrate();
+    var context = services.GetRequiredService<ApplicationDbContext>();
+    context.Database.Migrate();
 }
 
 // Configure the HTTP request pipeline.
