@@ -16,7 +16,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("ASPNETDemo3")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+4ac2b49ad4a36bf0c904238b4daf5f8636593b96")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+5492d8b9bb46196c727358d1a7233836f21165ed")]
 [assembly: System.Reflection.AssemblyProductAttribute("ASPNETDemo3")]
 [assembly: System.Reflection.AssemblyTitleAttribute("ASPNETDemo3")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
