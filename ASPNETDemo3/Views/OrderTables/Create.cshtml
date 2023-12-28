@@ -47,7 +47,7 @@
                 <select class="select2 form-control" asp-for="FoodIds" class="form-control" multiple="multiple">
                     @foreach (var food in foods)
                     {
-                        <option value=@food.Id >@food.Name</option>
+                        <option value=@food.Id>@food.Name - @food.Price.ToString("#,##0")</option>
                     }
                 </select>
                 <span asp-validation-for="FoodIds" class="text-danger"></span>

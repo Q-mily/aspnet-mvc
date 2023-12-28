@@ -5,94 +5,91 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h1>Index</h1>
+<h1>Đơn đặt tiệc</h1>
 
-<p>
-    <a asp-action="Create">Create New</a>
-</p>
-<table class="table">
-    <thead>
-        <tr>
-            <th class="text-center">
-                @Html.DisplayNameFor(model => model.customerName)
-            </th>
-            <th class="text-center">
-                @Html.DisplayNameFor(model => model.customerPhone)
-            </th>
-            <th class="text-center">
-                @Html.DisplayNameFor(model => model.groomName)
-            </th>
-            <th class="text-center">
-                @Html.DisplayNameFor(model => model.brideName)
-            </th>
-            <th class="text-center">
-                @Html.DisplayNameFor(model => model.ca)
-            </th>
-            <th class="text-center">
-                @Html.DisplayNameFor(model => model.dateAt)
-            </th>
-            <th class="text-center">
-                @Html.DisplayNameFor(model => model.status)
-            </th>
-            <th class="text-center">
-                @Html.DisplayNameFor(model => model.createdAt)
-            </th>
-            <th class="text-center">
-                @Html.DisplayNameFor(model => model.Lobby)
-            </th>
-            <th class="text-center">Options</th>
-        </tr>
-    </thead>
-    <tbody>
-@foreach (var item in Model) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.customerName)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.customerPhone)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.groomName)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.brideName)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.ca)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.dateAt)
-            </td>
-            <td>
-                    @if (item.status == 0)
+<div class="d-flex justify-content-end">
+    <a class="btn btn-primary" asp-action="Create">+ Tạo đơn</a>
+</div>
+<div class="card mt-2">
+        <div class="table">
+            <table class="table table-hover">
+                <thead class="bg-primary">
+                    <tr>
+                        <th class="text-center">
+                            @Html.DisplayNameFor(model => model.customerName)
+                        </th>
+                        <th class="text-center">
+                            @Html.DisplayNameFor(model => model.customerPhone)
+                        </th>
+                        <th class="text-center">
+                            @Html.DisplayNameFor(model => model.ca)
+                        </th>
+                        <th class="text-center">
+                            @Html.DisplayNameFor(model => model.dateAt)
+                        </th>
+                        <th class="text-center">
+                            @Html.DisplayNameFor(model => model.status)
+                        </th>
+                        <th class="text-center">
+                            @Html.DisplayNameFor(model => model.createdAt)
+                        </th>
+                        <th class="text-center">
+                            @Html.DisplayNameFor(model => model.Lobby)
+                        </th>
+                        <th class="text-center">Options</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model)
                     {
-                        @Html.Raw("<p class='bagde bg-danger rounded text-center'>Hủy</p>");
+                        <tr>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.customerName)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.customerPhone)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.ca)
+                            </td>
+                            <td>
+                            @Html.DisplayFor(modelItem => item.dateAt)
+                            </td>
+                            <td>
+                                @if (item.status == 0)
+                                {
+                                    @Html.Raw("<p class='bagde bg-danger rounded text-center'>Hủy</p>")
+                                    ;
+                                }
+                                @if (item.status == 1)
+                                {
+                                    @Html.Raw("<p class='bagde bg-warning rounded text-center'>Đang đặt</p>")
+                                    ;
+                                }
+                                @if (item.status == 2)
+                                {
+                                    @Html.Raw("<p class='bagde bg-primary rounded text-center'>Đã xác nhận</p>")
+                                    ;
+                                }
+                                @if (item.status == 3)
+                                {
+                                    @Html.Raw("<p class='bagde bg-success rounded text-center'>Thanh toán</p>")
+                                    ;
+                                }
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.createdAt)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Lobby.Name)
+                            </td>
+                            <td>
+                                <a asp-action="Details" asp-route-id="@item.Id">Xem</a> |
+                                <a class="text-danger" asp-action="Delete" asp-route-id="@item.Id">Xóa</a>
+                            </td>
+                        </tr>
                     }
-                @if (item.status == 1)
-                {
-                        @Html.Raw("<p class='bagde bg-warning rounded text-center'>Đang đặt</p>");
-                }
-                @if (item.status == 2)
-                {
-                        @Html.Raw("<p class='bagde bg-primary rounded text-center'>Hoàn tất</p>");
-                }
-                @if (item.status == 2)
-                {
-                        @Html.Raw("<p class='bagde bg-success rounded text-center'>Thanh toán</p>");
-                }
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.createdAt)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Lobby.Name)
-            </td>
-            <td>
-                <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
-            </td>
-        </tr>
-}
-    </tbody>
-</table>
+                </tbody>
+            </table>
+        </div>
+</div>

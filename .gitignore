@@ -74,3 +74,5 @@ _[Ss]cripts
 *.ncrunchsolution
 *.dot[Cc]over
 .vs
+ASPNETDemo3/.vs/
+ASPNETDemo3/obj/

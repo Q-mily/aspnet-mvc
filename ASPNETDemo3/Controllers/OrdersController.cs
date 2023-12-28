@@ -25,7 +25,7 @@ namespace ASPNETDemo3.Controllers
         public async Task<IActionResult> Index()
         {
 
-            var applicationDbContext = _context.Orders.Include(o => o.Lobby);
+            var applicationDbContext = _context.Orders.Include(o => o.Lobby).Where(o => o.status > -1);
             return View(await applicationDbContext.ToListAsync());
         }
 
@@ -62,9 +62,11 @@ namespace ASPNETDemo3.Controllers
         }
 
         // GET: Orders/Create
-        public IActionResult Create()
+        public async Task<IActionResult> Create()
         {
             ViewData["lobbyId"] = new SelectList(_context.Lobbies, "Id", "Id");
+            var lobbies = _context.Lobbies.ToList();
+            ViewBag.lobbies = lobbies;
             return View();
         }
 
@@ -174,8 +176,8 @@ namespace ASPNETDemo3.Controllers
             var order = await _context.Orders.FindAsync(id);
             if (order != null)
             {
-                order.status = 0;
-                _context.Add(order);
+                order.status = -1;
+                _context.Update(order);
                 //_context.Orders.Remove(order);
             }
             
@@ -188,26 +190,60 @@ namespace ASPNETDemo3.Controllers
           return (_context.Orders?.Any(e => e.Id == id)).GetValueOrDefault();
         }
 
-        public async Task<IActionResult> AddOrderTables(int? id)
+        public async Task<IActionResult> Confirm(int? id)
         {
-            if (id == null || _context.Orders == null)
+            if (_context.Orders == null)
             {
-                return NotFound();
+                return Problem("Entity set 'ApplicationDbContext.Orders'  is null.");
+            }
+            var order = await _context.Orders.FindAsync(id);
+            if (order != null)
+            {
+                order.status = 2;
+                _context.Update(order);
+                //_context.Orders.Remove(order);
             }
 
-            var order = await _context.Orders
-                .Include(o => o.Lobby)
-                .Include(o => o.OrderTables)
-                .FirstOrDefaultAsync(m => m.Id == id);
-            //var orderTables = await _context.OrderTables.Where(o => o.OrderId == order.Id).ToListAsync();
-            if (order == null)
+            await _context.SaveChangesAsync();
+            return RedirectToAction("Details", new { id = order.Id });
+        }
+
+        public async Task<IActionResult> Cancel(int? id)
+        {
+            if (_context.Orders == null)
             {
-                return NotFound();
+                return Problem("Entity set 'ApplicationDbContext.Orders'  is null.");
+            }
+            var order = await _context.Orders.FindAsync(id);
+            if (order != null)
+            {
+                order.status = 0;
+                _context.Update(order);
+                //_context.Orders.Remove(order);
             }
 
-            List<Lobby> lobbies = _context.Lobbies.ToList();
-            ViewBag.Lobbies = lobbies;
-            return View(order);
+            await _context.SaveChangesAsync();
+            return RedirectToAction("Details", new {id = order.Id });
+        }
+
+        public async Task<IActionResult> Payment(int? id)
+        {
+            if (_context.Orders == null)
+            {
+                return Problem("Entity set 'ApplicationDbContext.Orders'  is null.");
+            }
+            var order = await _context.Orders.Include(o => o.OrderTables).FirstOrDefaultAsync(o => o.Id == id);
+            if (order != null)
+            {
+                order.status = 3;
+                order.TotalPrice = order.OrderTables.Sum(t => t.TotalPrice);
+                order.PaymentAt = DateTime.Now;
+                _context.Update(order);
+                //_context.Orders.Remove(order);
+            }
+
+            await _context.SaveChangesAsync();
+            return RedirectToAction(nameof(Index));
         }
     }
 }

@@ -15,7 +15,45 @@
     <div class="col-6 d-flex justify-content-end">
         @if (order.status == 1)
         {
-            @Html.Raw("<button class='btn btn-danger' style='margin-right: 8px;'>Hủy</button><button class='btn btn-primary'>Xác nhận Đặt</button>");
+            @Html.Raw("<button class='btn btn-danger' style='margin-right: 8px;' id='cancel_btn'>Hủy</button><button class='btn btn-primary' id='confirm_btn'>Xác nhận Đặt</button>");
+        }
+        @if (order.status == 2)
+        {
+            @Html.Raw("<button class='btn btn-danger' style='margin-right: 8px;' id='cancel_btn'>Hủy</button><button class='btn btn-success' id='payment_btn'>Thanh toán</button>")
+            ;
+        }
+    </div>
+</div>
+<div class="card mt-2">
+    <div class="card-body">
+        <p>
+            Trạng thái:
+            <span>
+                @if (order.status == 0)
+                {
+                    @Html.Raw("<span class='bagde bg-danger rounded text-center p-1'>Hủy</span>")
+                    ;
+                }
+                @if (order.status == 1)
+                {
+                    @Html.Raw("<span class='bagde bg-warning rounded text-center p-1'>Đang đặt</span>");
+                }
+                @if (order.status == 2)
+                {
+                    @Html.Raw("<span class='bagde bg-primary rounded text-center p-1'>Đã xác nhận</span>")
+                    ;
+                }
+                @if (order.status == 3)
+                {
+                    @Html.Raw("<span class='bagde bg-success rounded text-center p-1'>Thanh toán</span>")
+                    ;
+                }
+            </span>
+        </p>
+        @if (order.status == 3)
+        {
+            @Html.Raw($"<p>Ngày thanh toán: {order.PaymentAt}</p>")
+            ;
         }
     </div>
 </div>
@@ -41,13 +79,13 @@
 
                     <div class="form-group">
                         <label asp-for="lobbyId" class="control-label">Sảnh</label>
-                        <select asp-for="lobbyId" class ="form-control">
-                            <option value="">--Trống--</option>
+                        <select asp-for="lobbyId" class ="form-control">                     
                             @foreach (var lobby in lobbies)
                             {
                                 <option value="@lobby.Id">@lobby.Name - (lượng bàn tối thiểu: @lobby.MinCountTable)</option>
                             }
                         </select>
+                        <span id="lobby_min" style="display:none"></span>
                     </div> 
                 </div>
                 <div class="col-6">
@@ -65,7 +103,6 @@
                     <div class="form-group">
                         <label asp-for="ca" class="control-label">Ca</label>
                         <select asp-for="ca" class="form-control">
-                            <option value="">--Trống--</option>
                             <option value="1"> Ca sáng (8:00 - 12:00)</option>
                             <option value="2"> Ca chiều (13:00 - 17:00)</option>
                             <option value="3"> Ca tối (18:00 - 22:00)</option>
@@ -78,7 +115,7 @@
                         <span asp-validation-for="dateAt" class="text-danger"></span>
                     </div>
                     <div class="form-group">
-                        <input type="submit" value="Cập nhật" class="btn btn-primary" />
+                        <input type="submit" value="Cập nhật" class="btn btn-primary" id="btn_update"/>
                     </div>
                 </div>
             </div>
@@ -92,9 +129,11 @@
         <div class="row">
             <div class="col-6">
                 <h4>Thông tin bàn ăn</h4>
+                <h5>Tổng số bàn: <span id="count_table">0</span></h5>
+                <h5>Tổng tiền: <span id="total_price">0</span>đ</h5>
             </div>
             <div class="col-6 text-end">
-                <a class="btn btn-info" asp-controller="OrderTables" asp-action="Create" asp-route-orderId="@order.Id">Thêm</a>
+                <a class="btn btn-info" asp-controller="OrderTables" asp-action="Create" asp-route-orderId="@order.Id" id="btn_add_table">Thêm</a>
             </div>
         </div>
         <div class="table-responsive">
@@ -115,11 +154,11 @@
                         <tr>
                             <td>@orderTable.table_name</td>
                             <td>@orderTable.Amount</td>
-                            <td>@orderTable.UnitPrice</td>  
-                            <td>@orderTable.TotalPrice</td>
+                            <td>@orderTable.UnitPrice.ToString("#,##0")</td>
+                            <td>@orderTable.TotalPrice.ToString("#,##0")</td>
                             <td>
-                                <a class="btn btn-primary" asp-controller="OrderTables" asp-action="Edit" asp-route-id="@orderTable.Id" asp-route-orderId="@order.Id">Chi tiết</a>
-                                <a class="btn btn-danger" asp-controller="OrderTables" asp-action="Delete" asp-route-id="@orderTable.Id">Xóa</a>
+                                <a class="btn btn-primary" asp-controller="OrderTables" asp-action="Details" asp-route-id="@orderTable.Id" asp-route-orderId="@order.Id">Chi tiết</a>
+                                <a class="btn btn-danger btn_delete_table" asp-controller="OrderTables" asp-action="Delete" asp-route-id="@orderTable.Id">Xóa</a>
                             </td>
                         </tr>
                     }
@@ -129,3 +168,71 @@
         </div>
     </div>
 </div>
+<script>
+    @if (order.status == 0 || order.status == 3)
+    {
+        @Html.Raw("$(document).ready(()=>{$('#btn_update')[0].style.display='none';$('#btn_add_table')[0].style.display='none';const del_table_btns=$('.btn_delete_table');for(i=0;i<del_table_btns.length;i++){del_table_btns[i].style.display='none';}})");
+    }
+
+    @if (order.status == 2)
+    {
+        @Html.Raw("$(document).ready(()=>{$('#btn_update')[0].style.display='none';})");
+    }
+
+
+    $(document).ready(() => {
+        $("#cancel_btn").on('click', (e) => {
+            let ok = confirm('Xác nhận hủy đơn đặt ?');
+            if (ok) {
+                window.location.assign(`/Orders/Cancel/${@order.Id}`);
+            }
+        })
+    })
+
+    $(document).ready(() => {
+        $("#confirm_btn").on('click', (e) => {
+            let ok = confirm('Xác nhận đặt ?');
+            if (ok) {
+                const min_count_table = parseInt($('#lobby_min')[0].innerHTML);
+                const current_count_table = parseInt($('#count_table')[0].innerHTML);
+                if (current_count_table >= min_count_table) {
+                    window.location.assign(`/Orders/Confirm/${@order.Id}`);
+                } else {
+                    alert(`Số bàn đặt chưa đủ ${current_count_table}/${min_count_table}`);
+                }
+               
+            }
+        })
+    })
+
+    $(document).ready(() => {
+        $("#payment_btn").on('click', (e) => {
+            let ok = confirm('Xác nhận thanh toán ?');
+            if (ok) {
+                window.location.assign(`/Orders/Payment/${@order.Id}`);
+            }
+        })
+    })
+
+    $(document).ready(() => {
+        let total_price = 0;
+        @foreach (var ot in @order.OrderTables)
+        {
+            var totalPrice = ot.TotalPrice;
+        @Html.Raw($"total_price += {totalPrice};")
+        ;
+        }
+        $('#total_price')[0].innerHTML = total_price.toLocaleString('en-US', { style: 'decimal' });
+
+        let count_table = 0;
+        @foreach (var ot in @order.OrderTables)
+        {
+            var count_table = ot.Amount;
+            @Html.Raw($"count_table += {count_table};")
+            ;
+        }
+        $('#count_table')[0].innerHTML = count_table.toLocaleString('en-US', { style: 'decimal' });
+
+        $("#lobby_min")[0].innerHTML = @order.Lobby.MinCountTable;
+    })
+</script>

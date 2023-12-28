@@ -1,7 +1,7 @@
 using ASPNETDemo3.Data;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
-
+using Microsoft.Extensions.FileProviders;
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
@@ -29,6 +29,8 @@ else
 }
 
 app.UseHttpsRedirection();
+
+// var assemblyDirectory = Path.GetDirectoryName(System.Reflection.Assembly.GetExecutingAssembly().Location);
 app.UseStaticFiles();
 
 app.UseRouting();

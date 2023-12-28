@@ -37,12 +37,13 @@ namespace ASPNETDemo3.Controllers
 
             var orderTable = await _context.OrderTables
                 .Include(o => o.Order)
+                .Include(o => o.Foods)
                 .FirstOrDefaultAsync(m => m.Id == id);
             if (orderTable == null)
             {
                 return NotFound();
             }
-
+            ViewBag.OrderTable = orderTable;
             return View(orderTable);
         }
 
