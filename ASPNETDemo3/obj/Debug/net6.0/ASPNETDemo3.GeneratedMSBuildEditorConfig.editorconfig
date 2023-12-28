@@ -9,173 +9,179 @@ build_property.EnforceExtendedAnalyzerRules =
 build_property._SupportedPlatformList = Linux,macOS,Windows
 build_property.RootNamespace = ASPNETDemo3
 build_property.RootNamespace = ASPNETDemo3
-build_property.ProjectDir = H:\repo\ASPNETDemo3\ASPNETDemo3\
+build_property.ProjectDir = D:\Workspace\UIT\SE310\aspnet-mvc\ASPNETDemo3\
+build_property.EnableComHosting = 
+build_property.EnableGeneratedComInterfaceComImportInterop = 
 build_property.RazorLangVersion = 6.0
 build_property.SupportLocalizedComponentNames = 
 build_property.GenerateRazorMetadataSourceChecksumAttributes = 
-build_property.MSBuildProjectDirectory = H:\repo\ASPNETDemo3\ASPNETDemo3
+build_property.MSBuildProjectDirectory = D:\Workspace\UIT\SE310\aspnet-mvc\ASPNETDemo3
 build_property._RazorSourceGeneratorDebug = 
 
-[H:/repo/ASPNETDemo3/ASPNETDemo3/Areas/Identity/Pages/Account/Login.cshtml]
+[D:/Workspace/UIT/SE310/aspnet-mvc/ASPNETDemo3/Areas/Identity/Pages/Account/Login.cshtml]
 build_metadata.AdditionalFiles.TargetPath = QXJlYXNcSWRlbnRpdHlcUGFnZXNcQWNjb3VudFxMb2dpbi5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[H:/repo/ASPNETDemo3/ASPNETDemo3/Areas/Identity/Pages/Account/Logout.cshtml]
+[D:/Workspace/UIT/SE310/aspnet-mvc/ASPNETDemo3/Areas/Identity/Pages/Account/Logout.cshtml]
 build_metadata.AdditionalFiles.TargetPath = QXJlYXNcSWRlbnRpdHlcUGFnZXNcQWNjb3VudFxMb2dvdXQuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[H:/repo/ASPNETDemo3/ASPNETDemo3/Areas/Identity/Pages/Account/Manage/Index.cshtml]
+[D:/Workspace/UIT/SE310/aspnet-mvc/ASPNETDemo3/Areas/Identity/Pages/Account/Manage/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = QXJlYXNcSWRlbnRpdHlcUGFnZXNcQWNjb3VudFxNYW5hZ2VcSW5kZXguY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[H:/repo/ASPNETDemo3/ASPNETDemo3/Areas/Identity/Pages/Account/Manage/SetPassword.cshtml]
+[D:/Workspace/UIT/SE310/aspnet-mvc/ASPNETDemo3/Areas/Identity/Pages/Account/Manage/SetPassword.cshtml]
 build_metadata.AdditionalFiles.TargetPath = QXJlYXNcSWRlbnRpdHlcUGFnZXNcQWNjb3VudFxNYW5hZ2VcU2V0UGFzc3dvcmQuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[H:/repo/ASPNETDemo3/ASPNETDemo3/Areas/Identity/Pages/Account/Manage/_ManageNav.cshtml]
+[D:/Workspace/UIT/SE310/aspnet-mvc/ASPNETDemo3/Areas/Identity/Pages/Account/Manage/_ManageNav.cshtml]
 build_metadata.AdditionalFiles.TargetPath = QXJlYXNcSWRlbnRpdHlcUGFnZXNcQWNjb3VudFxNYW5hZ2VcX01hbmFnZU5hdi5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[H:/repo/ASPNETDemo3/ASPNETDemo3/Areas/Identity/Pages/Account/Manage/_ViewImports.cshtml]
+[D:/Workspace/UIT/SE310/aspnet-mvc/ASPNETDemo3/Areas/Identity/Pages/Account/Manage/_ViewImports.cshtml]
 build_metadata.AdditionalFiles.TargetPath = QXJlYXNcSWRlbnRpdHlcUGFnZXNcQWNjb3VudFxNYW5hZ2VcX1ZpZXdJbXBvcnRzLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[H:/repo/ASPNETDemo3/ASPNETDemo3/Areas/Identity/Pages/Account/Register.cshtml]
+[D:/Workspace/UIT/SE310/aspnet-mvc/ASPNETDemo3/Areas/Identity/Pages/Account/Register.cshtml]
 build_metadata.AdditionalFiles.TargetPath = QXJlYXNcSWRlbnRpdHlcUGFnZXNcQWNjb3VudFxSZWdpc3Rlci5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[H:/repo/ASPNETDemo3/ASPNETDemo3/Areas/Identity/Pages/Account/_ViewImports.cshtml]
+[D:/Workspace/UIT/SE310/aspnet-mvc/ASPNETDemo3/Areas/Identity/Pages/Account/_ViewImports.cshtml]
 build_metadata.AdditionalFiles.TargetPath = QXJlYXNcSWRlbnRpdHlcUGFnZXNcQWNjb3VudFxfVmlld0ltcG9ydHMuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[H:/repo/ASPNETDemo3/ASPNETDemo3/Areas/Identity/Pages/_ValidationScriptsPartial.cshtml]
+[D:/Workspace/UIT/SE310/aspnet-mvc/ASPNETDemo3/Areas/Identity/Pages/_ValidationScriptsPartial.cshtml]
 build_metadata.AdditionalFiles.TargetPath = QXJlYXNcSWRlbnRpdHlcUGFnZXNcX1ZhbGlkYXRpb25TY3JpcHRzUGFydGlhbC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[H:/repo/ASPNETDemo3/ASPNETDemo3/Areas/Identity/Pages/_ViewImports.cshtml]
+[D:/Workspace/UIT/SE310/aspnet-mvc/ASPNETDemo3/Areas/Identity/Pages/_ViewImports.cshtml]
 build_metadata.AdditionalFiles.TargetPath = QXJlYXNcSWRlbnRpdHlcUGFnZXNcX1ZpZXdJbXBvcnRzLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[H:/repo/ASPNETDemo3/ASPNETDemo3/Areas/Identity/Pages/_ViewStart.cshtml]
+[D:/Workspace/UIT/SE310/aspnet-mvc/ASPNETDemo3/Areas/Identity/Pages/_ViewStart.cshtml]
 build_metadata.AdditionalFiles.TargetPath = QXJlYXNcSWRlbnRpdHlcUGFnZXNcX1ZpZXdTdGFydC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[H:/repo/ASPNETDemo3/ASPNETDemo3/Views/Foods/Create.cshtml]
+[D:/Workspace/UIT/SE310/aspnet-mvc/ASPNETDemo3/Views/Foods/Create.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcRm9vZHNcQ3JlYXRlLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[H:/repo/ASPNETDemo3/ASPNETDemo3/Views/Foods/Delete.cshtml]
+[D:/Workspace/UIT/SE310/aspnet-mvc/ASPNETDemo3/Views/Foods/Delete.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcRm9vZHNcRGVsZXRlLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[H:/repo/ASPNETDemo3/ASPNETDemo3/Views/Foods/Details.cshtml]
+[D:/Workspace/UIT/SE310/aspnet-mvc/ASPNETDemo3/Views/Foods/Details.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcRm9vZHNcRGV0YWlscy5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[H:/repo/ASPNETDemo3/ASPNETDemo3/Views/Foods/Edit.cshtml]
+[D:/Workspace/UIT/SE310/aspnet-mvc/ASPNETDemo3/Views/Foods/Edit.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcRm9vZHNcRWRpdC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[H:/repo/ASPNETDemo3/ASPNETDemo3/Views/Foods/Index.cshtml]
+[D:/Workspace/UIT/SE310/aspnet-mvc/ASPNETDemo3/Views/Foods/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcRm9vZHNcSW5kZXguY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[H:/repo/ASPNETDemo3/ASPNETDemo3/Views/Home/First.cshtml]
+[D:/Workspace/UIT/SE310/aspnet-mvc/ASPNETDemo3/Views/Home/First.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxGaXJzdC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[H:/repo/ASPNETDemo3/ASPNETDemo3/Views/Home/Index.cshtml]
+[D:/Workspace/UIT/SE310/aspnet-mvc/ASPNETDemo3/Views/Home/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxJbmRleC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[H:/repo/ASPNETDemo3/ASPNETDemo3/Views/Home/Privacy.cshtml]
+[D:/Workspace/UIT/SE310/aspnet-mvc/ASPNETDemo3/Views/Home/Privacy.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxQcml2YWN5LmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[H:/repo/ASPNETDemo3/ASPNETDemo3/Views/Lobbies/Create.cshtml]
+[D:/Workspace/UIT/SE310/aspnet-mvc/ASPNETDemo3/Views/Lobbies/Create.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcTG9iYmllc1xDcmVhdGUuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[H:/repo/ASPNETDemo3/ASPNETDemo3/Views/Lobbies/Delete.cshtml]
+[D:/Workspace/UIT/SE310/aspnet-mvc/ASPNETDemo3/Views/Lobbies/Delete.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcTG9iYmllc1xEZWxldGUuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[H:/repo/ASPNETDemo3/ASPNETDemo3/Views/Lobbies/Details.cshtml]
+[D:/Workspace/UIT/SE310/aspnet-mvc/ASPNETDemo3/Views/Lobbies/Details.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcTG9iYmllc1xEZXRhaWxzLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[H:/repo/ASPNETDemo3/ASPNETDemo3/Views/Lobbies/Edit.cshtml]
+[D:/Workspace/UIT/SE310/aspnet-mvc/ASPNETDemo3/Views/Lobbies/Edit.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcTG9iYmllc1xFZGl0LmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[H:/repo/ASPNETDemo3/ASPNETDemo3/Views/Lobbies/Index.cshtml]
+[D:/Workspace/UIT/SE310/aspnet-mvc/ASPNETDemo3/Views/Lobbies/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcTG9iYmllc1xJbmRleC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[H:/repo/ASPNETDemo3/ASPNETDemo3/Views/Orders/AddOrderTables.cshtml]
+[D:/Workspace/UIT/SE310/aspnet-mvc/ASPNETDemo3/Views/Orders/AddOrderTables.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcT3JkZXJzXEFkZE9yZGVyVGFibGVzLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[H:/repo/ASPNETDemo3/ASPNETDemo3/Views/Orders/Create.cshtml]
+[D:/Workspace/UIT/SE310/aspnet-mvc/ASPNETDemo3/Views/Orders/Create.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcT3JkZXJzXENyZWF0ZS5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[H:/repo/ASPNETDemo3/ASPNETDemo3/Views/Orders/Delete.cshtml]
+[D:/Workspace/UIT/SE310/aspnet-mvc/ASPNETDemo3/Views/Orders/Delete.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcT3JkZXJzXERlbGV0ZS5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[H:/repo/ASPNETDemo3/ASPNETDemo3/Views/Orders/Details.cshtml]
+[D:/Workspace/UIT/SE310/aspnet-mvc/ASPNETDemo3/Views/Orders/Details.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcT3JkZXJzXERldGFpbHMuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[H:/repo/ASPNETDemo3/ASPNETDemo3/Views/Orders/Edit.cshtml]
+[D:/Workspace/UIT/SE310/aspnet-mvc/ASPNETDemo3/Views/Orders/Edit.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcT3JkZXJzXEVkaXQuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[H:/repo/ASPNETDemo3/ASPNETDemo3/Views/Orders/Index.cshtml]
+[D:/Workspace/UIT/SE310/aspnet-mvc/ASPNETDemo3/Views/Orders/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcT3JkZXJzXEluZGV4LmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[H:/repo/ASPNETDemo3/ASPNETDemo3/Views/OrderTables/Create.cshtml]
+[D:/Workspace/UIT/SE310/aspnet-mvc/ASPNETDemo3/Views/OrderTables/Create.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcT3JkZXJUYWJsZXNcQ3JlYXRlLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[H:/repo/ASPNETDemo3/ASPNETDemo3/Views/OrderTables/Delete.cshtml]
+[D:/Workspace/UIT/SE310/aspnet-mvc/ASPNETDemo3/Views/OrderTables/Delete.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcT3JkZXJUYWJsZXNcRGVsZXRlLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[H:/repo/ASPNETDemo3/ASPNETDemo3/Views/OrderTables/Details.cshtml]
+[D:/Workspace/UIT/SE310/aspnet-mvc/ASPNETDemo3/Views/OrderTables/Details.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcT3JkZXJUYWJsZXNcRGV0YWlscy5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[H:/repo/ASPNETDemo3/ASPNETDemo3/Views/OrderTables/Edit.cshtml]
+[D:/Workspace/UIT/SE310/aspnet-mvc/ASPNETDemo3/Views/OrderTables/Edit.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcT3JkZXJUYWJsZXNcRWRpdC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[H:/repo/ASPNETDemo3/ASPNETDemo3/Views/OrderTables/Index.cshtml]
+[D:/Workspace/UIT/SE310/aspnet-mvc/ASPNETDemo3/Views/OrderTables/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcT3JkZXJUYWJsZXNcSW5kZXguY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[H:/repo/ASPNETDemo3/ASPNETDemo3/Views/Shared/Error.cshtml]
+[D:/Workspace/UIT/SE310/aspnet-mvc/ASPNETDemo3/Views/Shared/Error.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXEVycm9yLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[H:/repo/ASPNETDemo3/ASPNETDemo3/Views/Shared/_LoginPartial.cshtml]
+[D:/Workspace/UIT/SE310/aspnet-mvc/ASPNETDemo3/Views/Shared/_LoginPartial.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXF9Mb2dpblBhcnRpYWwuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[H:/repo/ASPNETDemo3/ASPNETDemo3/Views/Shared/_ValidationScriptsPartial.cshtml]
+[D:/Workspace/UIT/SE310/aspnet-mvc/ASPNETDemo3/Views/Shared/_ValidationScriptsPartial.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXF9WYWxpZGF0aW9uU2NyaXB0c1BhcnRpYWwuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[H:/repo/ASPNETDemo3/ASPNETDemo3/Views/_ViewImports.cshtml]
+[D:/Workspace/UIT/SE310/aspnet-mvc/ASPNETDemo3/Views/Users/Index.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVXNlcnNcSW5kZXguY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/Workspace/UIT/SE310/aspnet-mvc/ASPNETDemo3/Views/_ViewImports.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcX1ZpZXdJbXBvcnRzLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[H:/repo/ASPNETDemo3/ASPNETDemo3/Views/_ViewStart.cshtml]
+[D:/Workspace/UIT/SE310/aspnet-mvc/ASPNETDemo3/Views/_ViewStart.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcX1ZpZXdTdGFydC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[H:/repo/ASPNETDemo3/ASPNETDemo3/Views/Shared/_Layout.cshtml]
+[D:/Workspace/UIT/SE310/aspnet-mvc/ASPNETDemo3/Views/Shared/_Layout.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXF9MYXlvdXQuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = b-ksuad79vv6
