@@ -9,6 +9,7 @@ using ASPNETDemo3.Data;
 using System.Diagnostics;
 using System.Text.Json;
 using System.Text.Json.Serialization;
+using Microsoft.AspNetCore.Authorization;
 
 namespace ASPNETDemo3.Controllers
 {
@@ -22,6 +23,7 @@ namespace ASPNETDemo3.Controllers
         }
 
         // GET: Orders
+        [Authorize]
         public async Task<IActionResult> Index()
         {
 
@@ -30,6 +32,7 @@ namespace ASPNETDemo3.Controllers
         }
 
         // GET: Orders/Details/5
+        [Authorize]
         public async Task<IActionResult> Details(int? id)
         {
             if (id == null || _context.Orders == null)
@@ -62,6 +65,7 @@ namespace ASPNETDemo3.Controllers
         }
 
         // GET: Orders/Create
+        [Authorize]
         public async Task<IActionResult> Create()
         {
             ViewData["lobbyId"] = new SelectList(_context.Lobbies, "Id", "Id");
@@ -75,6 +79,7 @@ namespace ASPNETDemo3.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize]
         public async Task<IActionResult> Create([Bind("Id,lobbyId,customerName,customerPhone,groomName,brideName,ca,dateAt,status,createdAt")] Order order)
         {
             if (ModelState.IsValid)
@@ -92,6 +97,7 @@ namespace ASPNETDemo3.Controllers
         }
 
         // GET: Orders/Edit/5
+        [Authorize]
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null || _context.Orders == null)
@@ -113,6 +119,7 @@ namespace ASPNETDemo3.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize]
         public async Task<IActionResult> Edit(int id, [Bind("Id,lobbyId,customerName,customerPhone,groomName,brideName,ca,dateAt,status,createdAt")] Order order)
         {
             if (id != order.Id)
@@ -146,6 +153,7 @@ namespace ASPNETDemo3.Controllers
         }
 
         // GET: Orders/Delete/5
+        [Authorize]
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null || _context.Orders == null)

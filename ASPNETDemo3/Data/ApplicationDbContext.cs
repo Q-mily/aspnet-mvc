@@ -17,6 +17,10 @@ namespace ASPNETDemo3.Data
         }
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+            modelBuilder.Entity<Lobby>()
+                .Property(l => l.ImagePath)
+                .HasDefaultValue("./");
+
             modelBuilder.Entity<Food>()
                 .Property(p => p.status)
                 .HasDefaultValue(1);

@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using ASPNETDemo3.Data;
+using Microsoft.AspNetCore.Authorization;
 
 namespace ASPNETDemo3.Controllers
 {
@@ -19,6 +20,7 @@ namespace ASPNETDemo3.Controllers
         }
 
         // GET: Lobbies
+        [Authorize]
         public async Task<IActionResult> Index()
         {
               return _context.Lobbies != null ? 
@@ -27,6 +29,7 @@ namespace ASPNETDemo3.Controllers
         }
 
         // GET: Lobbies/Details/5
+        [Authorize]
         public async Task<IActionResult> Details(int? id)
         {
             if (id == null || _context.Lobbies == null)
@@ -45,6 +48,8 @@ namespace ASPNETDemo3.Controllers
         }
 
         // GET: Lobbies/Create
+
+        [Authorize]
         public IActionResult Create()
         {
             return View();
@@ -55,6 +60,7 @@ namespace ASPNETDemo3.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize]
         public async Task<IActionResult> Create([Bind("Id,Name,MinCountTable,ImagePath,Description")] Lobby lobby)
         {
             if (ModelState.IsValid)
@@ -71,6 +77,7 @@ namespace ASPNETDemo3.Controllers
         }
 
         // GET: Lobbies/Edit/5
+        [Authorize]
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null || _context.Lobbies == null)
@@ -91,6 +98,7 @@ namespace ASPNETDemo3.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize]
         public async Task<IActionResult> Edit(int id, [Bind("Id,Name,MinCountTable,ImagePath,Description")] Lobby lobby)
         {
             if (id != lobby.Id)
@@ -122,6 +130,7 @@ namespace ASPNETDemo3.Controllers
         }
 
         // GET: Lobbies/Delete/5
+        [Authorize]
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null || _context.Lobbies == null)
@@ -142,6 +151,7 @@ namespace ASPNETDemo3.Controllers
         // POST: Lobbies/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
+        [Authorize]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
             if (_context.Lobbies == null)
