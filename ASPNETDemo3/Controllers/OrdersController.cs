@@ -10,6 +10,8 @@ using System.Diagnostics;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 using Microsoft.AspNetCore.Authorization;
+using ASPNETDemo3.Models;
+using System.Drawing.Printing;
 
 namespace ASPNETDemo3.Controllers
 {
@@ -26,9 +28,39 @@ namespace ASPNETDemo3.Controllers
         [Authorize]
         public async Task<IActionResult> Index()
         {
+            var lobbies = _context.Lobbies.Where(l => l.status > 0).ToList();
+            ViewBag.lobbies = lobbies;
+            var filter = new OrderFilterModel
+            {
+                TotalCount = 0,
+                PageSize = 6,
+                Page = int.TryParse(Request.Query["page"], out int page_param) ? page_param : 1,
+                search = Request.Query["search"],
+                status = int.TryParse(Request.Query["status"], out int status_param) ? status_param : null,
+                lobbyId = int.TryParse(Request.Query["lobbyId"], out int lobbyId_param) ? lobbyId_param : null,
+                DateFrom = DateTime.TryParse(Request.Query["DateFrom"], out DateTime DateFrom_param) ? DateFrom_param : DateTime.MinValue,
+                DateTo = DateTime.TryParse(Request.Query["DateTo"], out DateTime DateTo_param) ? DateTo_param : DateTime.MinValue
+            };
+            ViewBag.FilterModel = filter;
 
-            var applicationDbContext = _context.Orders.Include(o => o.Lobby).Where(o => o.status > -1);
-            return View(await applicationDbContext.ToListAsync());
+            IQueryable<Order> query = _context.Orders.Include(o => o.Lobby)
+                .Where(order =>
+                    (string.IsNullOrEmpty(filter.search) || EF.Functions.Like(order.customerName, $"%{filter.search}%")) &&
+                    (filter.status == null || order.status == filter.status) &&
+                    (filter.lobbyId == null || order.lobbyId == filter.lobbyId) &&
+                    (filter.DateFrom == DateTime.MinValue || order.dateAt >= filter.DateFrom) &&
+                    (filter.DateTo == DateTime.MinValue || order.dateAt <= filter.DateTo) &&
+                    order.status > -1);
+
+            int totalCount = query.Count();
+            filter.TotalCount = totalCount;
+
+            var applicationDbContext = query
+                .Skip((filter.Page - 1) * filter.PageSize)
+                .Take(filter.PageSize)
+                .ToListAsync();
+
+            return View(await applicationDbContext);
         }
 
         // GET: Orders/Details/5

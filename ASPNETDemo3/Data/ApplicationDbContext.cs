@@ -11,6 +11,7 @@ namespace ASPNETDemo3.Data
         public DbSet<Order> Orders { get; set; }
         public DbSet<ApplicationUser>  User { get; set; }
         public DbSet<OrderTable> OrderTables { get; set; }
+        public DbSet<Service> Services { get; set; }
         public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options)
             : base(options)
         {
@@ -71,6 +72,10 @@ namespace ASPNETDemo3.Data
             modelBuilder.Entity<Food>()
                 .HasMany(f => f.OrderTables)
                 .WithMany(c => c.Foods);
+
+            modelBuilder.Entity<Service>()
+               .Property(p => p.CreatedAt)
+               .HasDefaultValueSql("GETUTCDATE()");
 
             base.OnModelCreating(modelBuilder);
         }

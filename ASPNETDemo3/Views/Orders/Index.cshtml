@@ -3,13 +3,77 @@
 @{
     ViewData["Title"] = "Index";
     Layout = "~/Views/Shared/_Layout.cshtml";
+    var FilterModel = ViewBag.FilterModel;
+    var lobbies = ViewBag.lobbies;
 }
 
-<h1>Đơn đặt tiệc</h1>
 
-<div class="d-flex justify-content-end">
-    <a class="btn btn-primary" asp-action="Create">+ Tạo đơn</a>
+<div class="row">
+    <div class="col-6">
+        <h1>Đơn đặt tiệc</h1>
+    </div>
+    <div class="col-6 d-flex justify-content-end">
+        <div>
+            <a class="btn btn-primary" asp-action="Create">+ Tạo đơn</a>
+        </div>
+    </div>
 </div>
+
+<div class="card mt-2 rounded">
+    <form asp-action="Index" method="GET">
+        <div class="card-body">
+            <div class="d-flex justify-content-center mb-2">
+                <input name="page" hidden value="1"/>
+                <div class="form-group" style="margin-right: 16px;">
+                    <label class="m-0 mr-2" style="white-space: nowrap;">Từ khóa</label>
+                    <input name="search" class="form-control input-air-primary" style="width: auto;" placeholder="Tên & Số điện thoại" value="@FilterModel.search">
+                </div>
+                <div class="form-group" style="margin-right: 16px;">
+                    <label class="m-0 mr-2" style="white-space: nowrap;">Trạng thái</label>
+                    <select name="status" value="@FilterModel.status" id="status" class="form-control form-select input-air-primary" style="width: auto;" name="status" value="@FilterModel.status" id="status">
+                        <option value="">-- Tất cả --</option>
+                        <option value="1">Đang đặt</option>
+                        <option value="2">Đã xác nhận</option>
+                        <option value="3">Thanh toán</option>
+                        <option value="0">Hủy</option>
+                    </select>
+                </div>
+                <div class="form-group" style="margin-right: 16px;">
+                    <label class="m-0 mr-2" style="white-space: nowrap;">Sảnh</label>
+                    <select name="lobbyId" id="lobbyId" value="@FilterModel.lobbyId" class="form-control form-select input-air-primary" style="width: auto;">
+                        <option value="">-- Tất cả --</option>
+                        @foreach(var lobby in lobbies)
+                        {
+                            <option value="@lobby.Id">@lobby.Name</option>
+                        }
+                    </select>
+                </div>
+                <div class="form-group" style="margin-right: 16px;">
+                    <label class="m-0 mr-2" style="white-space: nowrap;">Từ ngày</label>
+                    <input type="date" name="DateFrom" id="DateFrom" value="@FilterModel.DateFrom == DateTime.MinValue ? '' : @FilterModel.DateFrom.ToString("dd-MM-yyyy")" class="form-control input-air-primary" style="width: auto;">
+                </div>
+                <div class="form-group" style="margin-right: 16px;">
+                    <label class="m-0 mr-2" style="white-space: nowrap;">Đến ngày</label>
+                    <input type="date" name="DateTo" id="DateTo" value="@FilterModel.DateTo == DateTime.MinValue ? '' : @FilterModel.DateTo.ToString("dd-MM-yyyy")" class="form-control input-air-primary" style="width: auto;">
+                </div>
+            </div>
+            <div class="d-flex justify-content-center ">
+               
+              @*   <div class="d-flex align-items-center" style="margin-right: 16px;">
+                    <label class="m-0 mr-2">Theo</label> <br />
+                    <select class="form-select input-air-primary">
+                        <option value="1">Ngày tổ chức</option>
+                        <option value="2">Ngày tổ tạo</option>
+                    </select>
+                </div> *@
+            </div>
+            <div class="text-center">
+                <button class="btn btn-info">Tìm kiếm</button>
+            </div>
+        </div>
+    </form>
+</div>
+
 <div class="card mt-2">
         <div class="table">
             <table class="table table-hover">
@@ -53,7 +117,7 @@
                                 @Html.DisplayFor(modelItem => item.ca)
                             </td>
                             <td>
-                            @Html.DisplayFor(modelItem => item.dateAt)
+                                @item.dateAt.ToString("yyyy-MM-dd")
                             </td>
                             <td>
                                 @if (item.status == 0)
@@ -92,4 +156,97 @@
                 </tbody>
             </table>
         </div>
+
+        <ul class="pagination pagination-primary mt-2">
+            @if (FilterModel.TotalCount > FilterModel.PageSize)
+            {
+                int totalPages = (int)Math.Ceiling((double)FilterModel.TotalCount / FilterModel.PageSize);
+                int displayPages = 3; // Adjust the number of pages you want to display
+
+                int startPage = Math.Max(1, FilterModel.Page - displayPages / 2);
+                int endPage = Math.Min(startPage + displayPages - 1, totalPages);
+
+                if (startPage > 1)
+                {
+                    <li class="page-item">
+                        <a asp-action="Index" 
+                            asp-route-page="1" 
+                            class="page-link"
+                            asp-route-search="@FilterModel.search"
+                            asp-route-status = "@FilterModel.status"
+                            asp-route-lobbyId = "@FilterModel.lobbyId"
+                            asp-route-DateFrom= "@(FilterModel.DateFrom == DateTime.MinValue ? "" : @FilterModel.DateFrom.ToString("yyyy-MM-dd"))"
+                            asp-route-DateTo = "@(FilterModel.DateTo == DateTime.MinValue ? "" : @FilterModel.DateTo.ToString("yyyy-MM-dd"))"
+                        >
+                        1</a>
+                    </li>
+                    <span>...</span>
+                }
+
+                for (int i = startPage; i <= endPage; i++)
+                {
+                    if (i == FilterModel.Page)
+                    {
+                        <li class="page-item active"><strong class="page-link">@i</strong></li>
+                    }
+                    else
+                    {
+                        <a asp-action="Index" 
+                            asp-route-page="@i" 
+                            class="page-link"
+                           asp-route-search="@FilterModel.search"
+                           asp-route-status="@FilterModel.status"
+                           asp-route-lobbyId="@FilterModel.lobbyId"
+                       asp-route-DateFrom="@(FilterModel.DateFrom == DateTime.MinValue ? "" : @FilterModel.DateFrom.ToString("yyyy-MM-dd"))"
+                       asp-route-DateTo="@(FilterModel.DateTo == DateTime.MinValue ? "" : @FilterModel.DateTo.ToString("yyyy-MM-dd"))">
+                        @i
+                        </a>
+                    }
+                }
+
+                if (endPage < totalPages)
+                {
+                    <span>...</span>
+                    <li class="page-item">
+                        <a asp-action="Index" 
+                            asp-route-page="@totalPages" 
+                            class="page-link"
+                            asp-route-search="@FilterModel.search"
+                       asp-route-status="@FilterModel.status"
+                       asp-route-lobbyId="@FilterModel.lobbyId"
+                       asp-route-DateFrom="@(FilterModel.DateFrom == DateTime.MinValue ? "" : @FilterModel.DateFrom.ToString("yyyy-MM-dd"))"
+                       asp-route-DateTo="@(FilterModel.DateTo == DateTime.MinValue ? "" : @FilterModel.DateTo.ToString("yyyy-MM-dd"))">
+                        @totalPages
+                        </a>
+                    </li>
+                }
+            }
+        </ul>
+
 </div>
+<script>
+
+    $(document).ready(() => {
+        var selected = new URLSearchParams(window.location.search);
+        let seletedStatus = selected.get('status');
+        if (seletedStatus) {
+            $("#status").val(seletedStatus);
+            $('#status').trigger('change');
+        }
+        let seletedLobbyId = selected.get('lobbyId');
+        if (seletedLobbyId) {
+            $("#lobbyId").val(seletedLobbyId);
+            $('#lobbyId').trigger('change');
+        }
+        let seletedDateFrom = selected.get('DateFrom');
+        if (seletedDateFrom) {
+            $("#DateFrom").val(seletedDateFrom);
+            $('#DateFrom').trigger('change');
+        }
+        let seletedDateTo = selected.get('DateTo');
+        if (seletedDateTo) {
+            $("#DateTo").val(seletedDateTo);
+            $('#DateTo').trigger('change');
+        }
+    })
+</script>

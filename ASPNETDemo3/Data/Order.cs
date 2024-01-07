@@ -8,19 +8,19 @@ namespace ASPNETDemo3.Data
         public int? lobbyId { get; set; }
 
         [DisplayName("Tên khách đặt")]
-        public string? customerName {  get; set; }
+        public string customerName {  get; set; }
 
         [DisplayName("Số điện thoại")]
         public string? customerPhone { get; set; }
 
         [DisplayName("Tên chú rể")]
-        public string? groomName { get; set; }
+        public string groomName { get; set; }
 
         [DisplayName("Tên cô dâu")]
-        public string? brideName { get; set; }
+        public string brideName { get; set; }
         public string? ca {  get; set; }
         [DisplayName("Ngày tổ chức")]
-        public DateTime? dateAt { get; set; }
+        public DateTime dateAt { get; set; }
         [DisplayName("Trạng thái")]
         public int? status { get; set; }
         public DateTime? createdAt { get; set; }
