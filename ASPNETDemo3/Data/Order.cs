@@ -23,6 +23,7 @@ namespace ASPNETDemo3.Data
         public DateTime dateAt { get; set; }
         [DisplayName("Trạng thái")]
         public int? status { get; set; }
+        [DisplayName("Ngày đặt")]
         public DateTime? createdAt { get; set; }
         [DisplayName("Sảnh")]
         public Lobby? Lobby { get; set; }
